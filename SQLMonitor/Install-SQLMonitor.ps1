@@ -246,10 +246,10 @@ $releaseDiscussionURL = "https://ajaydwivedi.com/sqlmonitor/common-errors"
         -> Fixed issue#11 - Missing CPU Metrics For Extra SQL Instances on Same Host
 #>
 
-"$(Get-Date -Format yyyyMMMdd_HHmm) {0,-10} {1}" -f 'START:', "Working on server [$SqlInstanceToBaseline]." | Write-Host -ForegroundColor Yellow
-"$(Get-Date -Format yyyyMMMdd_HHmm) {0,-10} {1}" -f 'START:', "Deplying SQLMonitor v$sqlmonitorVersion.." | Write-Host -ForegroundColor Yellow
-"$(Get-Date -Format yyyyMMMdd_HHmm) {0,-10} {1}" -f 'START:', "For issues with this version, kindly visit $releaseDiscussionURL" | Write-Host -ForegroundColor Yellow
-"$(Get-Date -Format yyyyMMMdd_HHmm) {0,-10} {1}" -f 'START:', "For help, kindly reach out to 'Ajay Dwivedi <ajay.dwivedi2007@gmail.com>'`n" | Write-Host -ForegroundColor Yellow
+"$(Get-Date -Format yyyyMMMdd_HHmm) {0,-10} {1}" -f 'INICIO:', "Trabalhando no servidor [$SqlInstanceToBaseline]." | Write-Host -ForegroundColor Yellow
+"$(Get-Date -Format yyyyMMMdd_HHmm) {0,-10} {1}" -f 'INICIO:', "Implantando Inspector SQL Monitor v$sqlmonitorVersion.." | Write-Host -ForegroundColor Yellow
+"$(Get-Date -Format yyyyMMMdd_HHmm) {0,-10} {1}" -f 'INICIO:', "Para informar problemas sobre a versão, acesse $releaseDiscussionURL" | Write-Host -ForegroundColor Yellow
+"$(Get-Date -Format yyyyMMMdd_HHmm) {0,-10} {1}" -f 'INICIO:', "Se precisa de ajuda, Entre em contato com o suporte.`n" | Write-Host -ForegroundColor Yellow
 
 # All Steps
 $AllSteps = @(  "1__sp_WhoIsActive", "2__AllDatabaseObjects", "3__XEventSession",
@@ -309,12 +309,12 @@ if($SkipTsqlJobs -and $SkipPowerShellJobs) {
     $SkipAllJobs = $true
 }
 
-"$(Get-Date -Format yyyyMMMdd_HHmm) {0,-10} {1}" -f 'INFO:', "Clearing old PSSessions.."
+"$(Get-Date -Format yyyyMMMdd_HHmm) {0,-10} {1}" -f 'INFO:', "Limpando sessões antigas do PowerShell.."
 Get-PSSession | Remove-PSSession
 
 if($SqlInstanceToBaseline -eq '.' -or $SqlInstanceToBaseline -eq 'localhost') {
-    "$(Get-Date -Format yyyyMMMdd_HHmm) {0,-10} {1}" -f 'ERROR:', "'localhost' or '.' are not validate SQLInstance names." | Write-Host -ForegroundColor Red
-    Write-Error "Stop here. Fix above issue."
+    "$(Get-Date -Format yyyyMMMdd_HHmm) {0,-10} {1}" -f 'ERRO:', "'localhost' ou '.' não são nomes de instância válidos." | Write-Host -ForegroundColor Red
+    Write-Error "Corrija o problema para continuar."
 }
 
 # Evaluate path of SQLMonitor folder
@@ -325,8 +325,8 @@ if( (-not [String]::IsNullOrEmpty($PSScriptRoot)) -or ((-not [String]::IsNullOrE
     "$(Get-Date -Format yyyyMMMdd_HHmm) {0,-10} {1}" -f 'INFO:', "`$SQLMonitorPath = '$SQLMonitorPath'"
 }
 else {
-    "$(Get-Date -Format yyyyMMMdd_HHmm) {0,-10} {1}" -f 'ERROR:', "Kindly provide 'SQLMonitorPath' parameter value" | Write-Host -ForegroundColor Red
-    Write-Error "Stop here. Fix above issue."
+    "$(Get-Date -Format yyyyMMMdd_HHmm) {0,-10} {1}" -f 'ERRO:', "Informe o valor para o parâmetro 'SQLMonitorPath'" | Write-Host -ForegroundColor Red
+    Write-Error "Corrija o problema para continuar."
 }
 
 # Set windows credential if valid AD credential is provided as SqlCredential
